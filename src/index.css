@@ -1,0 +1,168 @@
+/* Reset e Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #050505; /* Preto profundo */
+  color: #f0f0f0; /* Branco suave */
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Container Principal */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Links */
+a {
+  color: #9d4edd; /* Roxo médio */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #c77dff; /* Roxo mais claro */
+}
+
+/* Cabeçalho */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(123, 44, 191, 0.2);
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to bottom, #0f0f0f, #050505);
+  padding: 6rem 0;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  background: linear-gradient(135deg, #7b2cbf, #9d4edd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #b0b0b0;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  border-left: 2px solid #7b2cbf;
+  padding-left: 1.5rem;
+}
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7b2cbf, #9d4edd);
+  color: white;
+  box-shadow: 0 10px 30px rgba(123, 44, 191, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(123, 44, 191, 0.6);
+}
+
+.btn-secondary {
+  border: 2px solid #9d4edd;
+  color: #9d4edd;
+}
+
+.btn-secondary:hover {
+  background: rgba(157, 78, 221, 0.1);
+  color: white;
+}
+
+/* Seções */
+.section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(135deg, #7b2cbf, #9d4edd);
+}
+
+/* Cards de Projetos */
+.project-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(123, 44, 191, 0.1);
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Rodapé */
+.footer {
+  background: #0f0f0f;
+  padding: 3rem 0;
+  text-align: center;
+  border-top: 1px solid rgba(123, 44, 191, 0.2);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 0;
+  }
+  
+  .section {
+    padding: 3rem 0;
+  }
+}
