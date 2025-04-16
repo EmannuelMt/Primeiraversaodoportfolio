@@ -4,7 +4,10 @@ import {
   FaProjectDiagram, 
   FaEnvelope, 
   FaSignInAlt,
-  FaCode
+  FaCode,
+  FaGraduationCap,
+  FaBriefcase,
+  FaLaptopCode
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -13,6 +16,7 @@ import "./Navbar.css";
 function Navbar() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,9 +27,17 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+    document.body.style.overflow = mobileMenuOpen ? 'auto' : 'hidden';
+  };
+
   const navLinks = [
     { path: "/", label: "Início", icon: <FaHome /> },
+    { path: "/experience", label: "Experiência", icon: <FaBriefcase /> },
+    { path: "/education", label: "Educação", icon: <FaGraduationCap /> },
     { path: "/projects", label: "Projetos", icon: <FaProjectDiagram /> },
+    { path: "/skills", label: "Habilidades", icon: <FaLaptopCode /> },
     { path: "/contact", label: "Contato", icon: <FaEnvelope /> },
     { path: "/login", label: "Login", icon: <FaSignInAlt /> }
   ];
@@ -60,6 +72,18 @@ function Navbar() {
     }
   };
 
+  const mobileMenuVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
   return (
     <motion.header 
       className={`navbar ${scrolled ? "scrolled" : ""}`}
@@ -83,6 +107,7 @@ function Navbar() {
           </Link>
         </motion.div>
 
+        {/* Desktop Navigation */}
         <nav className="nav-menu">
           <ul className="nav-links">
             {navLinks.map((link, index) => (
@@ -97,6 +122,7 @@ function Navbar() {
                 <Link 
                   to={link.path} 
                   className={`nav-link ${location.pathname === link.path ? "active" : ""}`}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="nav-icon">{link.icon}</span>
                   <span className="nav-text">{link.label}</span>
@@ -117,7 +143,62 @@ function Navbar() {
             ))}
           </ul>
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className={`mobile-menu-button ${mobileMenuOpen ? "open" : ""}`}
+          onClick={toggleMobileMenu}
+          aria-label="Menu"
+          aria-expanded={mobileMenuOpen}
+        >
+          <span className="menu-line"></span>
+          <span className="menu-line"></span>
+          <span className="menu-line"></span>
+        </button>
       </div>
+
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            className="mobile-menu"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ type: "spring", stiffness: 100 }}
+          >
+            <motion.ul
+              className="mobile-nav-links"
+              variants={mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {navLinks.map((link, index) => (
+                <motion.li
+                  key={`mobile-${link.path}`}
+                  variants={navItemVariants}
+                  custom={index}
+                >
+                  <Link 
+                    to={link.path} 
+                    className={`mobile-nav-link ${location.pathname === link.path ? "active" : ""}`}
+                    onClick={toggleMobileMenu}
+                  >
+                    <span className="mobile-nav-icon">{link.icon}</span>
+                    <span className="mobile-nav-text">{link.label}</span>
+                    {location.pathname === link.path && (
+                      <motion.span 
+                        className="mobile-active-indicator"
+                        layoutId="mobileActiveIndicator"
+                      />
+                    )}
+                  </Link>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="navbar-bottom-border"></div>
     </motion.header>
