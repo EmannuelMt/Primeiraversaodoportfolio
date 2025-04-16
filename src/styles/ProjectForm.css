@@ -1,0 +1,60 @@
+.project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--preto-2);
+    border-radius: var(--borda-arredondada);
+    border: 1px solid var(--preto-3);
+  }
+  
+  .project-form input,
+  .project-form textarea {
+    padding: 12px 15px;
+    border-radius: var(--borda-arredondada-pequena);
+    border: 1px solid var(--preto-3);
+    background: var(--preto-1);
+    color: var(--branco);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .project-form input:focus,
+  .project-form textarea:focus {
+    outline: none;
+    border-color: var(--roxo-2);
+  }
+  
+  .project-form textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .project-form button {
+    padding: 12px 20px;
+    border-radius: var(--borda-arredondada);
+    background-color: var(--roxo-2);
+    color: var(--branco);
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .project-form button:hover {
+    background-color: var(--roxo-3);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .project-form {
+      padding: 20px;
+    }
+    
+    .project-form input,
+    .project-form textarea {
+      padding: 10px 12px;
+    }
+  }
