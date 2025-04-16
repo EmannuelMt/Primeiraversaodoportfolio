@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -13,9 +12,14 @@
   --gray: #b0b0b0;
   --gray-dark: #707070;
   --social-color: var(--purple-2);
+  
+  /* Animation durations */
+  --anim-fast: 0.3s;
+  --anim-medium: 0.5s;
+  --anim-slow: 0.8s;
 }
 
-/* Animations */
+/* Optimized Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -27,7 +31,7 @@
   100% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
 }
 
-/* Estilos Base */
+/* Base Styles with Performance Optimizations */
 .footer-ultra {
   background-color: var(--black-1);
   color: var(--white);
@@ -36,6 +40,7 @@
   font-family: 'Montserrat', sans-serif;
   overflow: hidden;
   isolation: isolate;
+  will-change: transform;
 }
 
 .footer-liquid-effect {
@@ -49,6 +54,7 @@
   opacity: 0.15;
   animation: liquid 8s ease-in-out infinite;
   z-index: -1;
+  will-change: border-radius;
 }
 
 .footer-container {
@@ -61,13 +67,14 @@
   position: relative;
 }
 
-/* Seções */
+/* Section Styles */
 .footer-section {
   margin-bottom: 2rem;
 }
 
+/* Logo Styles */
 .footer-logo {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 2.5rem); /* Responsive font size */
   font-weight: 700;
   margin-bottom: 2rem;
   display: flex;
@@ -77,7 +84,7 @@
 }
 
 .logo-gradient {
-  background: linear-gradient(90deg, var(--purple-2), var(--purple-3));
+  background: var(--purple-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -101,12 +108,14 @@
   right: -30px;
   transform: rotate(15deg);
   font-weight: 700;
+  animation: float 3s ease-in-out infinite;
 }
 
+/* Text Styles */
 .footer-description {
   color: var(--gray);
   line-height: 1.8;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2vw, 0.95rem); /* Responsive font size */
   margin-bottom: 2.5rem;
   position: relative;
   padding-left: 1.5rem;
@@ -115,7 +124,7 @@
 
 .footer-title {
   color: var(--white);
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 3vw, 1.4rem); /* Responsive font size */
   margin-bottom: 2rem;
   font-weight: 600;
 }
@@ -123,6 +132,7 @@
 .title-underline {
   position: relative;
   padding-bottom: 0.5rem;
+  display: inline-block;
 }
 
 .title-underline::after {
@@ -134,9 +144,14 @@
   height: 3px;
   background: var(--purple-gradient);
   border-radius: 3px;
+  transition: width var(--anim-medium) ease;
 }
 
-/* Tech Stack */
+.title-underline:hover::after {
+  width: 100%;
+}
+
+/* Tech Stack Section */
 .tech-stack {
   margin-top: 3rem;
 }
@@ -165,20 +180,27 @@
   font-size: 0.9rem;
   cursor: default;
   border: 1px solid rgba(123, 44, 191, 0.2);
-  transition: all 0.3s ease;
+  transition: all var(--anim-fast) ease;
+  will-change: transform, box-shadow;
 }
 
 .stack-item:hover {
   border-color: var(--purple-2);
-  box-shadow: 0 5px 15px rgba(123, 44, 191, 0.2);
+  box-shadow: 0 5px 15px rgba(123, 44, 191, 0.3);
+  transform: translateY(-2px);
 }
 
 .stack-icon {
   color: var(--purple-2);
   font-size: 1.2rem;
+  transition: transform var(--anim-fast) ease;
 }
 
-/* Links */
+.stack-item:hover .stack-icon {
+  transform: scale(1.1);
+}
+
+/* Links Section */
 .footer-links {
   list-style: none;
   padding: 0;
@@ -199,7 +221,7 @@
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all var(--anim-fast) ease;
   background: transparent;
   z-index: 1;
 }
@@ -213,7 +235,7 @@
   color: var(--purple-2);
   font-size: 1.1rem;
   min-width: 20px;
-  transition: all 0.3s ease;
+  transition: all var(--anim-fast) ease;
 }
 
 .link-hover {
@@ -225,7 +247,7 @@
   background: var(--purple-gradient);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.4s ease;
+  transition: transform var(--anim-medium) ease, height var(--anim-fast) ease;
   z-index: -1;
 }
 
@@ -235,7 +257,7 @@
   opacity: 0.1;
 }
 
-/* Contato */
+/* Contact Section */
 .contact-list {
   list-style: none;
   padding: 0;
@@ -248,23 +270,29 @@
   gap: 1.2rem;
   margin-bottom: 1.2rem;
   color: var(--gray);
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
   padding: 0.8rem 1rem;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all var(--anim-fast) ease;
 }
 
 .contact-item:hover {
   background: rgba(123, 44, 191, 0.05);
+  transform: translateX(5px);
 }
 
 .contact-icon {
   color: var(--purple-2);
   font-size: 1.3rem;
   min-width: 24px;
+  transition: transform var(--anim-fast) ease;
 }
 
-/* Social */
+.contact-item:hover .contact-icon {
+  transform: scale(1.1);
+}
+
+/* Social Links */
 .social-container {
   margin-top: 3rem;
 }
@@ -284,10 +312,11 @@
   border-radius: 8px;
   color: var(--white);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all var(--anim-fast) ease;
   border: 1px solid rgba(123, 44, 191, 0.2);
   position: relative;
   overflow: hidden;
+  will-change: transform, box-shadow;
 }
 
 .social-link::before {
@@ -299,14 +328,14 @@
   height: 100%;
   background: linear-gradient(135deg, var(--social-color), var(--purple-3));
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--anim-fast) ease;
   z-index: -1;
 }
 
 .social-link:hover {
   border-color: transparent;
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .social-link:hover::before {
@@ -315,21 +344,20 @@
 
 .social-icon {
   font-size: 1.3rem;
-  transition: all 0.3s ease;
+  transition: all var(--anim-fast) ease;
 }
 
 .social-text {
   font-size: 0.95rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all var(--anim-fast) ease;
 }
 
-.social-link:hover .social-icon,
-.social-link:hover .social-text {
-  color: white;
+.social-link:hover .social-icon {
+  transform: scale(1.1);
 }
 
-/* Footer Bottom */
+/* Footer Bottom Section */
 .footer-bottom {
   background-color: var(--black-2);
   padding: 2rem;
@@ -357,7 +385,7 @@
 .highlight {
   color: var(--white);
   font-weight: 600;
-  background: linear-gradient(90deg, var(--purple-2), var(--purple-3));
+  background: var(--purple-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -372,10 +400,21 @@
   opacity: 0.7;
 }
 
-/* Responsivo */
-@media (max-width: 992px) {
+/* Responsive Design */
+@media (max-width: 1200px) {
   .footer-container {
     gap: 3rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .footer-container {
+    padding: 3rem 1.5rem;
+  gap: 2.5rem;
+  }
+  
+  .footer-section {
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -383,7 +422,6 @@
   .footer-container {
     grid-template-columns: 1fr;
     gap: 3rem;
-    padding: 3rem 1.5rem;
   }
   
   .footer-section {
@@ -429,16 +467,53 @@
   }
 }
 
-@media (max-width: 480px) {
-  .footer-liquid-effect {
-    display: none;
-  }
-  
+@media (max-width: 576px) {
   .footer-ultra {
     padding-top: 4rem;
   }
   
+  .footer-liquid-effect {
+    width: 200px;
+    height: 200px;
+    top: -50px;
+    left: -30px;
+  }
+  
   .social-links {
     flex-direction: column;
+    align-items: center;
+  }
+  
+  .social-link {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .footer-bottom {
+    padding: 1.5rem;
+  }
+  
+  .watermark {
+    position: static;
+    display: block;
+    margin-top: 1rem;
+  }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .footer-liquid-effect {
+    animation: none;
+  }
+  
+  .logo-badge {
+    animation: none;
   }
 }

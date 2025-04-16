@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
-import { 
-  FaCode, 
-  FaReact, 
-  FaNodeJs, 
-  FaDatabase,
+import {
+  FaCode,
   FaArrowRight,
   FaTools,
   FaBook,
@@ -11,10 +8,9 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState } from "react";
 import "./Home.css";
 
-// Constantes para dados
+// Dados dos projetos em destaque
 const FEATURED_PROJECTS = [
   {
     id: 1,
@@ -39,13 +35,15 @@ const FEATURED_PROJECTS = [
   }
 ];
 
+// Habilidades atuais
 const CURRENT_SKILLS = [
-  { name: "React", level: 80 },
-  { name: "TypeScript", level: 75 },
-  { name: "Node.js", level: 70 },
-  { name: "GraphQL", level: 65 }
+  { name: "React", level: 30 },
+  { name: "JavaScript", level: 65 },
+  { name: "HTML", level: 50 },
+  { name: "CSS", level: 50 }
 ];
 
+// Futuros aprendizados
 const FUTURE_SKILLS = [
   { name: "Rust", reason: "Para desenvolvimento de sistemas performáticos" },
   { name: "WebAssembly", reason: "Para aplicações web de alto desempenho" },
@@ -53,6 +51,7 @@ const FUTURE_SKILLS = [
   { name: "Blockchain", reason: "Para entender tecnologias descentralizadas" }
 ];
 
+// Stack tecnológico
 const TECH_STACK = [
   { name: "Frontend", tools: ["React", "Next.js", "TailwindCSS", "Framer Motion"] },
   { name: "Backend", tools: ["Node.js", "Express", "NestJS", "GraphQL"] },
@@ -61,7 +60,7 @@ const TECH_STACK = [
 ];
 
 // Configurações de animação
-const CONTAINER_VARIANTS = {
+const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -72,7 +71,7 @@ const CONTAINER_VARIANTS = {
   }
 };
 
-const ITEM_VARIANTS = {
+const itemVariants = {
   hidden: { y: 50, opacity: 0 },
   visible: {
     y: 0,
@@ -80,8 +79,43 @@ const ITEM_VARIANTS = {
     transition: {
       type: "spring",
       stiffness: 100,
-      damping: 10
+      damping: 10,
+      duration: 0.8
     }
+  },
+  hover: {
+    scale: 1.03,
+    transition: { type: "spring", stiffness: 400 }
+  }
+};
+
+const cardVariants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 120 }
+  },
+  hover: {
+    y: -10,
+    boxShadow: "0 15px 30px rgba(123, 44, 191, 0.3)"
+  }
+};
+
+const textVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
+const progressVariants = {
+  hidden: { width: 0 },
+  visible: {
+    width: "100%",
+    transition: { duration: 1.5, ease: "easeInOut" }
   }
 };
 
@@ -91,34 +125,42 @@ export default function Home() {
     threshold: 0.1
   });
 
-  const [darkMode, setDarkMode] = useState(false);
-
   return (
-    <div className={`home-page ${darkMode ? 'dark-mode' : ''}`}>
+    <div className="home-page">
       {/* Seção Hero */}
       <motion.section
         className="highlight-section"
         ref={ref}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        variants={CONTAINER_VARIANTS}
-        aria-labelledby="hero-heading"
-        viewport={{ once: true }}
+        variants={containerVariants}
       >
-        <div className="highlight-bg" aria-hidden="true"></div>
-        
+        <div className="highlight-bg"></div>
+
         <div className="container">
-          <motion.div className="highlight-content" variants={ITEM_VARIANTS}>
+          <motion.div 
+            className="highlight-content"
+            variants={containerVariants}
+          >
             <motion.figure
               className="highlight-img-container"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 200 }}
+              variants={itemVariants}
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+              animate={{
+                y: [0, -10, 0],
+                transition: {
+                  repeat: Infinity,
+                  duration: 4,
+                  ease: "easeInOut"
+                }
+              }}
             >
               <picture>
                 <source srcSet="/assets/emmannuel.webp" type="image/webp" />
                 <img
                   src="/assets/emmannuel.jpg"
-                  alt="Retrato de Emmannuel"
+                  alt="Retrato de Emannuel"
                   className="highlight-img"
                   width={350}
                   height={350}
@@ -127,173 +169,362 @@ export default function Home() {
               </picture>
             </motion.figure>
 
-            <div className="highlight-text">
-              <motion.h1 id="hero-heading" variants={ITEM_VARIANTS}>
-                <span className="greeting">Oi, eu sou</span>
-                <span className="name-highlight">Emmannuel</span>
+            <motion.div 
+              className="highlight-text"
+              variants={containerVariants}
+            >
+              <motion.h1 variants={textVariants}>
+                <motion.span 
+                  className="greeting"
+                  variants={textVariants}
+                >
+                  Oi, eu sou
+                </motion.span>
+                <motion.span 
+                  className="name-highlight"
+                  variants={textVariants}
+                  animate={{
+                    textShadow: ["0 0 10px rgba(157, 78, 221, 0.3)", "0 0 15px rgba(157, 78, 221, 0.7)", "0 0 10px rgba(157, 78, 221, 0.3)"],
+                    transition: { 
+                      repeat: Infinity,
+                      duration: 3,
+                      ease: "easeInOut"
+                    }
+                  }}
+                >
+                  Emannuel
+                </motion.span>
               </motion.h1>
-              
-              <motion.p className="highlight-description" variants={ITEM_VARIANTS}>
-                Desenvolvedor Fullstack apaixonado por criar experiências digitais 
-                extraordinárias. Especialista em arquitetura de sistemas escaláveis 
-                e interfaces intuitivas.
+
+              <motion.p 
+                className="highlight-description"
+                variants={textVariants}
+                transition={{ delay: 0.2 }}
+              >
+                Prazer, me chamo Emannuel. Tenho 20 anos e sou uma mistura de extrovertido com introvertido.
+                Atualmente trabalho como auxiliar de produção na área industrial, setor onde ganhei bastante experiência ao longo do tempo. Já atuei em outras áreas, mas foi na indústria que fiquei por mais tempo.
+
+                Agora estou em transição para a área de desenvolvimento web, onde venho estudando e construindo projetos próprios. Tenho planos de cursar Engenharia de Software e me aprofundar ainda mais nesse universo da tecnologia.
+
+                Neste portfólio, você vai encontrar minhas experiências profissionais e alguns dos projetos de programação que desenvolvi até agora.
               </motion.p>
-              
-              <motion.div className="highlight-actions" variants={ITEM_VARIANTS}>
-                <Link 
-                  to="/projects" 
+
+              <motion.div 
+                className="highlight-actions"
+                variants={containerVariants}
+              >
+                <Link
+                  to="/projects"
                   className="cta-button primary"
-                  aria-label="Ver projetos"
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 10px 20px rgba(123, 44, 191, 0.4)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <span>Ver meus projetos</span>
-                  <FaArrowRight className="cta-icon" aria-hidden="true" />
+                  <motion.span
+                    animate={{ 
+                      x: [0, 5, 0],
+                      transition: { 
+                        repeat: Infinity, 
+                        duration: 1.5,
+                        ease: "easeInOut"
+                      }
+                    }}
+                  >
+                    <FaArrowRight />
+                  </motion.span>
                 </Link>
-                <Link 
-                  to="/contact" 
+                <Link
+                  to="/contact"
                   className="cta-button secondary"
-                  aria-label="Ir para contato"
+                  whileHover={{ 
+                    scale: 1.05,
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <span>Contato direto</span>
                 </Link>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
 
       {/* Seção de Projetos */}
-      <section className="featured-projects" aria-labelledby="projects-heading">
+      <motion.section
+        className="featured-projects"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+      >
         <div className="container">
-          <h2 id="projects-heading" className="section-title">
-            <FaCode className="title-icon" aria-hidden="true" />
+          <motion.h2 
+            className="section-title"
+            variants={itemVariants}
+          >
+            <motion.span
+              animate={{ 
+                rotate: [0, 360],
+                transition: { 
+                  duration: 8, 
+                  repeat: Infinity, 
+                  ease: "linear" 
+                }
+              }}
+            >
+              <FaCode />
+            </motion.span>
             <span>Projetos em Destaque</span>
-          </h2>
-          
-          <div className="card-grid">
+          </motion.h2>
+
+          <motion.div 
+            className="card-grid"
+            variants={containerVariants}
+          >
             {FEATURED_PROJECTS.map((project) => (
-              <motion.article 
+              <motion.article
                 key={project.id}
                 className="project-card"
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                variants={ITEM_VARIANTS}
-                custom={project.id * 0.1}
-                whileHover={{ y: -10 }}
+                variants={cardVariants}
+                whileHover="hover"
+                whileTap={{ scale: 0.98 }}
               >
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
                 
-                <div className="tech-tags">
+                <motion.div 
+                  className="tech-tags"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ staggerChildren: 0.1 }}
+                >
                   {project.technologies.map((tech) => (
-                    <span key={tech} className="tech-tag">{tech}</span>
+                    <motion.span 
+                      key={tech} 
+                      className="tech-tag"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      {tech}
+                    </motion.span>
                   ))}
-                </div>
-                
-                <Link 
-                  to={project.link} 
+                </motion.div>
+
+                <Link
+                  to={project.link}
                   className="card-btn"
-                  aria-label={`Ver detalhes do projeto ${project.title}`}
+                  whileHover={{ 
+                    backgroundColor: "var(--roxo-3)"
+                  }}
                 >
                   <span>Ver detalhes</span>
-                  <FaArrowRight className="btn-icon" aria-hidden="true" />
+                  <motion.span
+                    animate={{ 
+                      x: [0, 5, 0],
+                      transition: { 
+                        repeat: Infinity, 
+                        duration: 1.5 
+                      }
+                    }}
+                  >
+                    <FaArrowRight />
+                  </motion.span>
                 </Link>
               </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Seção de Tecnologias */}
-      <section className="tech-stack-section" aria-labelledby="tech-stack-heading">
+      <motion.section
+        className="tech-stack-section"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+      >
         <div className="container">
-          <h2 id="tech-stack-heading" className="section-title">
-            <FaTools className="title-icon" aria-hidden="true" />
+          <motion.h2 
+            className="section-title"
+            variants={itemVariants}
+          >
+            <motion.span
+              animate={{ 
+                scale: [1, 1.2, 1],
+                transition: { 
+                  repeat: Infinity, 
+                  duration: 3 
+                }
+              }}
+            >
+              <FaTools />
+            </motion.span>
             <span>Tecnologias Utilizadas</span>
-          </h2>
-          
-          <p className="section-subtitle">
-            Este site foi construído com as seguintes tecnologias:
-          </p>
-          
-          <div className="stack-grid">
+          </motion.h2>
+
+          <motion.div 
+            className="stack-grid"
+            variants={containerVariants}
+          >
             {TECH_STACK.map((stack) => (
-              <motion.div 
+              <motion.div
                 key={stack.name}
                 className="stack-card"
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                variants={ITEM_VARIANTS}
+                variants={itemVariants}
+                whileHover={{ 
+                  scale: 1.03,
+                  boxShadow: "0 15px 30px rgba(123, 44, 191, 0.3)"
+                }}
               >
-                <h3>{stack.name}</h3>
-                <ul className="stack-list">
+                <motion.h3
+                  whileHover={{ color: "var(--roxo-3)" }}
+                >
+                  {stack.name}
+                </motion.h3>
+                <motion.ul 
+                  className="stack-list"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ staggerChildren: 0.1 }}
+                >
                   {stack.tools.map((tool) => (
-                    <li key={tool}>{tool}</li>
+                    <motion.li 
+                      key={tool}
+                      whileHover={{ 
+                        scale: 1.05,
+                        color: "var(--roxo-3)"
+                      }}
+                    >
+                      {tool}
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Seção de Habilidades */}
-      <section className="skills-section" aria-labelledby="skills-heading">
+      <motion.section
+        className="skills-section"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+      >
         <div className="container">
-          <h2 id="skills-heading" className="section-title">
-            <FaChartLine className="title-icon" aria-hidden="true" />
+          <motion.h2 
+            className="section-title"
+            variants={itemVariants}
+          >
+            <motion.span
+              animate={{ 
+                rotate: [0, 360],
+                transition: { 
+                  duration: 6, 
+                  repeat: Infinity, 
+                  ease: "linear" 
+                }
+              }}
+            >
+              <FaChartLine />
+            </motion.span>
             <span>Habilidades Atuais</span>
-          </h2>
-          
-          <div className="skills-container">
+          </motion.h2>
+
+          <motion.div 
+            className="skills-container"
+            variants={containerVariants}
+          >
             {CURRENT_SKILLS.map((skill) => (
-              <motion.div 
+              <motion.div
                 key={skill.name}
                 className="skill-item"
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                variants={ITEM_VARIANTS}
+                variants={itemVariants}
+                whileHover={{ scale: 1.03 }}
               >
                 <div className="skill-header">
-                  <span>{skill.name}</span>
+                  <motion.span
+                    whileHover={{ color: "var(--roxo-3)" }}
+                  >
+                    {skill.name}
+                  </motion.span>
                   <span>{skill.level}%</span>
                 </div>
                 <div className="skill-bar">
-                  <div 
-                    className="skill-progress" 
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
+                  <motion.div
+                    className="skill-progress"
+                    initial={{ width: 0 }}
+                    whileInView={{
+                      width: `${skill.level}%`,
+                      transition: { duration: 1.5 }
+                    }}
+                    viewport={{ once: true }}
+                  />
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Seção de Futuros Aprendizados */}
-      <section className="future-section" aria-labelledby="future-heading">
+      <motion.section
+        className="future-section"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+      >
         <div className="container">
-          <h2 id="future-heading" className="section-title">
-            <FaBook className="title-icon" aria-hidden="true" />
+          <motion.h2 
+            className="section-title"
+            variants={itemVariants}
+          >
+            <motion.span
+              animate={{ 
+                y: [0, -5, 0],
+                transition: { 
+                  repeat: Infinity, 
+                  duration: 3 
+                }
+              }}
+            >
+              <FaBook />
+            </motion.span>
             <span>Futuros Aprendizados</span>
-          </h2>
-          
-          <div className="future-grid">
+          </motion.h2>
+
+          <motion.div 
+            className="future-grid"
+            variants={containerVariants}
+          >
             {FUTURE_SKILLS.map((skill) => (
-              <motion.div 
+              <motion.div
                 key={skill.name}
                 className="future-card"
-                initial="hidden"
-                animate={inView ? "visible" : "hidden"}
-                variants={ITEM_VARIANTS}
-                whileHover={{ scale: 1.03 }}
+                variants={itemVariants}
+                whileHover={{ 
+                  scale: 1.03,
+                  boxShadow: "0 20px 40px rgba(123, 44, 191, 0.3)"
+                }}
               >
-                <h3>{skill.name}</h3>
-                <p>{skill.reason}</p>
+                <motion.h3
+                  whileHover={{ color: "var(--roxo-3)" }}
+                >
+                  {skill.name}
+                </motion.h3>
+                <motion.p
+                  whileHover={{ scale: 1.02 }}
+                >
+                  {skill.reason}
+                </motion.p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

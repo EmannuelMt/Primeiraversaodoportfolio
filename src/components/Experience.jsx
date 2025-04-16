@@ -1,108 +1,345 @@
 import React from 'react';
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { 
+  FaBriefcase, 
+  FaCalendarAlt, 
+  FaMapMarkerAlt, 
+  FaIndustry, 
+  FaTruck, 
+  FaBoxes,
+  FaUtensils,
+  FaStore
+} from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import './Experience.css';
 
 const experienceData = [
   {
     id: 1,
-    company: "Empresa A",
-    position: "Desenvolvedor Front-end Sênior",
-    period: "2021 - Presente",
-    location: "São Paulo, SP",
-    description: "Desenvolvimento de aplicações web modernas utilizando React.js, TypeScript e Next.js. Liderança técnica de equipe de 5 desenvolvedores.",
+    company: "Come Em Pé",
+    position: "Auxiliar de Salgadeiro e Balconista",
+    period: "Jan 2024 - Fev 2024",
+    location: "Presencial",
+    description: "Atuei na produção de salgados e atendimento ao público, desenvolvendo habilidades rápidas em ambiente dinâmico de alimentação.",
     responsibilities: [
-      "Arquitetura e implementação de sistemas front-end",
-      "Otimização de performance (redução de 40% no tempo de carregamento)",
-      "Mentoria de desenvolvedores júniores",
-      "Integração com APIs REST e GraphQL"
+      "Preparo de diversos tipos de salgados",
+      "Atendimento ao cliente no balcão",
+      "Manutenção da limpeza e organização do estabelecimento",
     ],
-    technologies: ["React", "TypeScript", "Next.js", "Redux", "Styled Components"]
+    skills: ["Atendimento ao cliente", "Trabalho sob pressão", "Habilidade manual", "Agilidade"],
+    icon: <FaUtensils className="experience-icon" />
   },
   {
     id: 2,
-    company: "Empresa B",
-    position: "Desenvolvedor Front-end Pleno",
-    period: "2019 - 2021",
-    location: "Remoto",
-    description: "Desenvolvimento de interfaces de usuário para plataforma SaaS de e-commerce.",
+    company: "Brainfarma",
+    position: "Jovem Aprendiz - Auxiliar de Produção",
+    period: "Maio 2023 - Dez 2023",
+    location: "Presencial",
+    description: "Atuei como auxiliar de produção e movimentador de carga, desempenhando atividades essenciais para garantir a qualidade e eficiência dos processos.",
     responsibilities: [
-      "Implementação de novos features usando React",
-      "Refatoração de código legado",
-      "Testes unitários e de integração",
-      "Trabalho em equipe ágil (Scrum)"
+      "Inspeção de paletes, assegurando integridade e qualidade dos produtos",
+      "Controle de matéria-prima secundária",
+      "Montagem de paletes",
+      "Suporte ao operador na linha de produção",
+      "Manutenção de ambiente produtivo eficiente"
     ],
-    technologies: ["React", "JavaScript", "CSS Modules", "Jest"]
+    skills: ["Organização", "Controle de qualidade", "Trabalho em equipe", "Proatividade"],
+    icon: <FaIndustry className="experience-icon" />
   },
   {
     id: 3,
-    company: "Empresa C",
-    position: "Desenvolvedor Front-end Júnior",
-    period: "2017 - 2019",
-    location: "Rio de Janeiro, RJ",
-    description: "Primeira experiência profissional como desenvolvedor front-end.",
+    company: "Freelance",
+    position: "Ajudante de Motorista",
+    period: "Junho 2019 - Setembro 2019",
+    location: "Presencial",
+    description: "Atuei como ajudante de motorista, auxiliando nas entregas e garantindo a organização e segurança das cargas transportadas.",
     responsibilities: [
-      "Manutenção de sites corporativos",
-      "Implementação de designs responsivos",
-      "Integração com back-end PHP"
+      "Carregamento e descarregamento de mercadorias",
+      "Planejamento de rotas para otimização de tempo",
+      "Conferência de documentos e notas fiscais",
+      "Atendimento ao cliente durante entregas"
     ],
-    technologies: ["HTML5", "CSS3", "JavaScript", "jQuery"]
+    skills: ["Logística", "Atendimento", "Organização", "Trabalho sob pressão"],
+    icon: <FaTruck className="experience-icon" />
+  },
+  {
+    id: 4,
+    company: "Freelance",
+    position: "Auxiliar de Carga e Descarga",
+    period: "Março 2018 - Outubro 2018",
+    location: "Presencial",
+    description: "Experiência prática em carga e descarga de mercadorias, com foco no manuseio seguro e organização eficiente.",
+    responsibilities: [
+      "Movimentação e organização de mercadorias",
+      "Otimização de espaço de armazenamento",
+      "Manuseio seguro de cargas",
+      "Cumprimento rigoroso de prazos"
+    ],
+    skills: ["Força física", "Eficiência", "Comprometimento", "Agilidade"],
+    icon: <FaBoxes className="experience-icon" />
   }
 ];
 
+// Configurações de animação melhoradas
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 12,
+      duration: 0.7
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { scale: 0.97, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: { 
+      type: "spring",
+      stiffness: 130,
+      damping: 10,
+      mass: 0.5
+    }
+  },
+  hover: {
+    y: -8,
+    boxShadow: "0 12px 28px rgba(123, 44, 191, 0.25)",
+    transition: {
+      type: "spring",
+      stiffness: 300
+    }
+  }
+};
+
+const iconVariants = {
+  hover: {
+    rotate: [0, 10, -10, 0],
+    transition: {
+      duration: 0.8
+    }
+  }
+};
+
 function Experience() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.05
+  });
+
   return (
-    <section className="experience-section">
+    <motion.section 
+      className="experience-section" 
+      id="experiencia"
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      variants={containerVariants}
+      ref={ref}
+    >
       <div className="container">
-        <h2 className="section-title">
-          <FaBriefcase className="section-icon" />
-          Experiência Profissional
-        </h2>
+        <motion.div
+          className="section-header"
+          variants={itemVariants}
+        >
+          <motion.h2 
+            className="section-title"
+            whileHover={{
+              color: "#9d4edd",
+              transition: { duration: 0.3 }
+            }}
+          >
+            <motion.span
+              animate={{
+                rotate: [0, 15, -15, 0],
+                transition: {
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  duration: 4,
+                  ease: "easeInOut"
+                }
+              }}
+            >
+              <FaBriefcase className="section-icon" />
+            </motion.span>
+            <span className="title-text">Jornada Profissional</span>
+            <motion.span 
+              className="title-decoration"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ 
+                duration: 1.2,
+                ease: "anticipate"
+              }}
+            />
+          </motion.h2>
+          <motion.p
+            className="section-subtitle"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Minhas experiências profissionais que moldaram minha carreira
+          </motion.p>
+        </motion.div>
         
-        <div className="timeline">
+        <motion.div 
+          className="experience-timeline"
+          variants={containerVariants}
+        >
           {experienceData.map((exp) => (
-            <div key={exp.id} className="timeline-item">
-              <div className="timeline-content">
-                <div className="experience-header">
-                  <h3 className="company-name">{exp.company}</h3>
-                  <span className="position">{exp.position}</span>
-                </div>
-                
-                <div className="experience-meta">
-                  <span className="meta-item">
-                    <FaCalendarAlt className="meta-icon" />
-                    {exp.period}
-                  </span>
-                  <span className="meta-item">
-                    <FaMapMarkerAlt className="meta-icon" />
-                    {exp.location}
-                  </span>
-                </div>
-                
-                <p className="experience-description">{exp.description}</p>
-                
-                <div className="responsibilities">
-                  <h4>Principais Responsabilidades:</h4>
-                  <ul>
-                    {exp.responsibilities.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="technologies">
-                  <h4>Tecnologias Utilizadas:</h4>
-                  <div className="tech-tags">
-                    {exp.technologies.map((tech) => (
-                      <span key={tech} className="tech-tag">{tech}</span>
-                    ))}
-                  </div>
+            <motion.div 
+              key={exp.id} 
+              className="experience-card"
+              variants={cardVariants}
+              whileHover="hover"
+            >
+              <div className="card-header">
+                <motion.div 
+                  className="company-icon-container"
+                  variants={iconVariants}
+                  whileHover="hover"
+                >
+                  <div className="company-icon-background"></div>
+                  {exp.icon}
+                </motion.div>
+                <div className="company-info">
+                  <motion.h3 
+                    className="company-name"
+                    whileHover={{ 
+                      color: "#9d4edd",
+                      x: 5
+                    }}
+                  >
+                    {exp.company}
+                  </motion.h3>
+                  <motion.span 
+                    className="position"
+                    whileHover={{ color: "#9d4edd" }}
+                  >
+                    {exp.position}
+                  </motion.span>
                 </div>
               </div>
-            </div>
+              
+              <div className="experience-meta">
+                <motion.span 
+                  className="meta-item"
+                  whileHover={{ 
+                    scale: 1.05,
+                    color: "#9d4edd"
+                  }}
+                >
+                  <FaCalendarAlt className="meta-icon" />
+                  <span>{exp.period}</span>
+                </motion.span>
+                <motion.span 
+                  className="meta-item"
+                  whileHover={{ 
+                    scale: 1.05,
+                    color: "#9d4edd"
+                  }}
+                >
+                  <FaMapMarkerAlt className="meta-icon" />
+                  <span>{exp.location}</span>
+                </motion.span>
+              </div>
+              
+              <motion.p 
+                className="experience-description"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+              >
+                {exp.description}
+              </motion.p>
+              
+              <div className="card-section">
+                <motion.h4 
+                  className="section-subtitle"
+                  initial={{ x: -20, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 150 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                >
+                  <span>Principais Atividades</span>
+                </motion.h4>
+                <ul className="responsibilities-list">
+                  {exp.responsibilities.map((item, index) => (
+                    <motion.li 
+                      key={index} 
+                      className="responsibility-item"
+                      initial={{ opacity: 0, x: -15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.08 + 0.2 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                    >
+                      <motion.span 
+                        className="bullet"
+                        whileHover={{ scale: 1.5 }}
+                      ></motion.span>
+                      <span>{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="card-section">
+                <motion.h4 
+                  className="section-subtitle"
+                  initial={{ x: -20, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 150, delay: 0.1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                >
+                  <span>Competências Desenvolvidas</span>
+                </motion.h4>
+                <motion.div 
+                  className="skills-tags"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ staggerChildren: 0.1, delayChildren: 0.3 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                >
+                  {exp.skills.map((skill) => (
+                    <motion.span 
+                      key={skill} 
+                      className="skill-tag"
+                      whileHover={{ 
+                        scale: 1.15,
+                        backgroundColor: "#7b2cbf",
+                        color: "white"
+                      }}
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      transition={{ type: "spring" }}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

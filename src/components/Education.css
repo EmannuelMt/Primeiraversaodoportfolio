@@ -1,150 +1,310 @@
-/* Education.css */
+:root {
+  --roxo-1: #5a00b5;
+  --roxo-2: #7b2cbf;
+  --roxo-3: #9d4edd;
+  --roxo-claro: #c77dff;
+  --preto-1: #050505;
+  --preto-2: #0f0f0f;
+  --preto-3: #1a1a1a;
+  --branco: #f0f0f0;
+  --branco-suave: #e0e0e0;
+  --cinza: #b0b0b0;
+  --cinza-escuro: #707070;
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --sombra-roxo: 0 8px 24px rgba(123, 44, 191, 0.3);
+  --borda-arredondada: 14px;
+  --borda-arredondada-pequena: 8px;
+}
 
 .education-section {
-    padding: 5rem 0;
-    background-color: #fff;
-    scroll-margin-top: 70px;
+  padding: 80px 0;
+  background-color: var(--preto-2);
+  color: var(--branco-suave);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.section-icon {
+  font-size: 2.5rem;
+  color: var(--roxo-2);
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--branco);
+}
+
+.divider {
+  height: 3px;
+  width: 80px;
+  background: linear-gradient(to right, var(--roxo-2), var(--roxo-claro));
+  margin: 0 auto;
+  border-radius: var(--borda-arredondada-pequena);
+}
+
+.education-block {
+  margin-bottom: 60px;
+}
+
+.education-block h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  color: var(--branco);
+}
+
+.education-block h3 .icon {
+  margin-right: 15px;
+  color: var(--roxo-2);
+}
+
+/* Timeline styles */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--preto-3);
+}
+
+.timeline-card {
+  position: relative;
+  margin-bottom: 30px;
+  background: var(--preto-3);
+  border-radius: var(--borda-arredondada);
+  padding: 25px;
+  box-shadow: var(--sombra);
+  transition: all 0.3s ease;
+  border: 1px solid var(--preto-1);
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -30px;
+  top: 20px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--roxo-2);
+  border: 3px solid var(--preto-2);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.timeline-header h4 {
+  font-size: 1.2rem;
+  color: var(--branco);
+  margin: 0;
+}
+
+.period {
+  color: var(--cinza);
+  font-weight: 500;
+}
+
+.timeline-content h5 {
+  font-size: 1rem;
+  color: var(--roxo-claro);
+  margin: 5px 0 10px;
+}
+
+.timeline-content p {
+  color: var(--cinza);
+  margin-bottom: 15px;
+}
+
+.certified-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(123, 44, 191, 0.1);
+  color: var(--roxo-claro);
+  padding: 5px 10px;
+  border-radius: var(--borda-arredondada-pequena);
+  font-size: 0.9rem;
+  border: 1px solid var(--roxo-2);
+}
+
+.certified-badge svg {
+  margin-right: 5px;
+}
+
+/* Courses grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.course-card {
+  background: var(--preto-3);
+  border-radius: var(--borda-arredondada);
+  padding: 20px;
+  box-shadow: var(--sombra);
+  transition: all 0.3s ease;
+  border: 1px solid var(--preto-1);
+}
+
+.course-header {
+  margin-bottom: 15px;
+}
+
+.course-header h4 {
+  font-size: 1.1rem;
+  color: var(--branco);
+  margin: 0 0 5px;
+}
+
+.platform {
+  font-size: 0.9rem;
+  color: var(--cinza);
+}
+
+.progress-container {
+  margin: 15px 0;
+  height: 8px;
+  background: var(--preto-1);
+  border-radius: var(--borda-arredondada-pequena);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, var(--roxo-2), var(--roxo-claro));
+  border-radius: var(--borda-arredondada-pequena);
+}
+
+.progress-text {
+  position: absolute;
+  right: 5px;
+  top: -20px;
+  font-size: 0.8rem;
+  color: var(--cinza);
+}
+
+.course-link {
+  display: flex;
+  align-items: center;
+  color: var(--roxo-claro);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.course-link svg {
+  margin-left: 5px;
+}
+
+/* Certificates grid */
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.certificate-card {
+  background: var(--preto-3);
+  border-radius: var(--borda-arredondada);
+  padding: 20px;
+  box-shadow: var(--sombra);
+  transition: all 0.3s ease;
+  border: 1px solid var(--preto-1);
+}
+
+.certificate-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.certificate-header h4 {
+  font-size: 1.1rem;
+  color: var(--branco);
+  margin: 0;
+}
+
+.duration {
+  font-size: 0.9rem;
+  color: var(--cinza);
+}
+
+.institution {
+  color: var(--cinza);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.certificate-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.year {
+  font-size: 0.9rem;
+  color: var(--cinza);
+}
+
+.verified {
+  display: flex;
+  align-items: center;
+  color: var(--roxo-claro);
+  font-size: 0.9rem;
+  background: rgba(123, 44, 191, 0.1);
+  padding: 3px 8px;
+  border-radius: var(--borda-arredondada-pequena);
+  border: 1px solid var(--roxo-2);
+}
+
+.verified svg {
+  margin-right: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 2rem;
   }
   
-  .education-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2rem;
+  .education-block h3 {
+    font-size: 1.5rem;
   }
   
-  .section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #2c3e50;
-    position: relative;
-  }
-  
-  .section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: #3498db;
-    margin: 0.5rem auto;
-    border-radius: 2px;
+  .courses-grid,
+  .certificates-grid {
+    grid-template-columns: 1fr;
   }
   
   .timeline {
-    position: relative;
-    padding-left: 50px;
-  }
-  
-  .timeline-item {
-    position: relative;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
+    padding-left: 20px;
   }
   
   .timeline-marker {
-    position: absolute;
-    left: -50px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #3498db;
-    border: 4px solid #fff;
-    box-shadow: 0 0 0 4px #3498db;
-    z-index: 2;
+    left: -20px;
   }
-  
-  .timeline-content {
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .timeline-content:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .institution {
-    font-size: 1.4rem;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-  }
-  
-  .degree {
-    font-size: 1.1rem;
-    color: #3498db;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-  
-  .period {
-    display: inline-block;
-    background: #e3f2fd;
-    color: #3498db;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-  
-  .description {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 0.5rem;
-  }
-  
-  .honors-badge {
-    display: inline-block;
-    background: #e8f5e9;
-    color: #2e7d32;
-    padding: 0.3rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-top: 0.5rem;
-  }
-  
-  .timeline-connector {
-    position: absolute;
-    left: -40px;
-    top: 20px;
-    bottom: 0;
-    width: 2px;
-    background: #e0e0e0;
-    z-index: 1;
-  }
-  
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .education-section {
-      padding: 3rem 0;
-    }
-    
-    .section-title {
-      font-size: 2rem;
-    }
-    
-    .timeline {
-      padding-left: 30px;
-    }
-    
-    .timeline-marker {
-      left: -30px;
-      width: 16px;
-      height: 16px;
-    }
-    
-    .timeline-content {
-      padding: 1.5rem;
-    }
-    
-    .institution {
-      font-size: 1.2rem;
-    }
-    
-    .degree {
-      font-size: 1rem;
-    }
-  }
+}

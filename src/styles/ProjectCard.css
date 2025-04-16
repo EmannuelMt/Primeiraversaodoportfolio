@@ -1,93 +1,97 @@
 .project-card {
-    background-color: var(--black-2);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(123, 44, 191, 0.1);
-    box-shadow: var(--shadow-md);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--purple-2);
-  }
-  
-  .project-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid rgba(123, 44, 191, 0.2);
+  background: var(--preto-3);
+  border-radius: var(--borda-arredondada);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  transition: all 0.3s ease;
+  border: 1px solid var(--preto-1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-image-container {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-links {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.project-link {
+  background: rgba(31, 31, 31, 0.8);
+  color: var(--branco);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  background: var(--roxo-2);
+}
+
+.project-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-title {
+  font-size: 1.3rem;
+  color: var(--branco);
+  margin-bottom: 10px;
+}
+
+.project-description {
+  color: var(--cinza);
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-tag {
+  background: var(--preto-2);
+  color: var(--roxo-claro);
+  padding: 5px 10px;
+  border-radius: var(--borda-arredondada-pequena);
+  font-size: 0.8rem;
+  border: 1px solid var(--roxo-2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-image-container {
+    height: 180px;
   }
   
   .project-content {
-    padding: var(--space-md);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    padding: 15px;
   }
   
   .project-title {
-    font-size: 1.3rem;
-    margin-bottom: var(--space-sm);
-    color: var(--white);
+    font-size: 1.2rem;
   }
-  
-  .project-description {
-    color: var(--gray);
-    margin-bottom: var(--space-md);
-    flex: 1;
-  }
-  
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-bottom: var(--space-lg);
-  }
-  
-  .project-tag {
-    background-color: rgba(123, 44, 191, 0.2);
-    color: var(--purple-2);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-full);
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-  
-  .project-links {
-    display: flex;
-    gap: var(--space-sm);
-    margin-top: auto;
-  }
-  
-  .project-link {
-    flex: 1;
-    padding: var(--space-xs);
-    text-align: center;
-    border-radius: var(--radius-sm);
-    font-weight: 500;
-    transition: all 0.3s ease;
-  }
-  
-  .project-link.github {
-    background-color: var(--black-3);
-    color: var(--white);
-    border: 1px solid var(--gray-dark);
-  }
-  
-  .project-link.github:hover {
-    background-color: #333;
-    border-color: #555;
-  }
-  
-  .project-link.demo {
-    background-color: var(--purple-2);
-    color: white;
-  }
-  
-  .project-link.demo:hover {
-    background-color: var(--purple-3);
-  }
+}

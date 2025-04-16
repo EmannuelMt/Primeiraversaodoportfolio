@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ProjectCard from "../components/ProjectCard";
 import ProjectModal from "../components/ProjectModal";
-import { FiSearch, FiPlus, FiX, FiFilter, FiUser } from "react-icons/fi";
+import { FiSearch, FiPlus, FiX, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Projects.css";
 
@@ -18,7 +18,42 @@ const mockProjects = [
     createdAt: "2023-10-15",
     updatedAt: "2023-11-20"
   },
-  // ... (keep your other mock projects data)
+  {
+    id: 2,
+    title: "E-commerce API",
+    description: "API RESTful para sistema e-commerce com Node.js, Express e MongoDB, incluindo autenticação JWT e pagamentos.",
+    image: "/proj2.png",
+    tags: ["Node.js", "Express", "MongoDB", "JWT"],
+    githubUrl: "#",
+    liveUrl: "#",
+    category: "Backend",
+    createdAt: "2023-09-10",
+    updatedAt: "2023-10-05"
+  },
+  {
+    id: 3,
+    title: "Task Manager App",
+    description: "Aplicativo mobile para gerenciamento de tarefas com React Native e Firebase para sincronização em tempo real.",
+    image: "/proj3.png",
+    tags: ["React Native", "Firebase", "Mobile"],
+    githubUrl: "#",
+    liveUrl: "#",
+    category: "Mobile",
+    createdAt: "2023-08-22",
+    updatedAt: "2023-09-15"
+  },
+  {
+    id: 4,
+    title: "Blog Fullstack",
+    description: "Blog completo com frontend em React e backend em Node.js, com sistema de comentários e autenticação.",
+    image: "/proj4.png",
+    tags: ["React", "Node.js", "MongoDB", "Fullstack"],
+    githubUrl: "#",
+    liveUrl: "#",
+    category: "Fullstack",
+    createdAt: "2023-07-18",
+    updatedAt: "2023-08-30"
+  }
 ];
 
 const categories = ["Todos", "Web", "Backend", "Fullstack", "Mobile"];
@@ -111,126 +146,101 @@ function Projects() {
       opacity: 1,
       y: 0,
       transition: { delay: i * 0.1, duration: 0.5 }
-    })
+    }),
+    hover: {
+      y: -5,
+      boxShadow: "var(--sombra-roxo)",
+      transition: { duration: 0.3 }
+    }
+  };
+
+  const controlsVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
   };
 
   return (
     <div className="projects-container">
-      {/* Navbar Superior */}
-      <header className="projects-navbar">
-        <div className="navbar-left">
-          <div className="search-container">
-            <FiSearch className="search-icon" />
-            <input
-              type="text"
-              placeholder="Buscar projetos..."
-              value={searchTerm}
-              onChange={handleSearch}
-              className="search-input"
-              aria-label="Buscar projetos"
-            />
-            {searchTerm && (
-              <motion.button 
-                className="clear-search-btn"
-                onClick={() => setSearchTerm("")}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FiX />
-              </motion.button>
-            )}
-          </div>
+      {/* Controls Section */}
+      <motion.div 
+        className="projects-controls"
+        initial="hidden"
+        animate="visible"
+        variants={controlsVariants}
+      >
+        <div className="search-container">
+          <FiSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Buscar projetos..."
+            value={searchTerm}
+            onChange={handleSearch}
+            className="search-input"
+            aria-label="Buscar projetos"
+          />
+          {searchTerm && (
+            <motion.button 
+              className="clear-search-btn"
+              onClick={() => setSearchTerm("")}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FiX />
+            </motion.button>
+          )}
         </div>
 
-        <nav className="navbar-center">
-          <ul className="nav-links">
-            <li className={`nav-item ${window.location.pathname === "/" ? "active" : ""}`}>
-              <a href="/">Início</a>
-            </li>
-            <li className={`nav-item ${window.location.pathname === "/projects" ? "active" : ""}`}>
-              <a href="/projects">Projetos</a>
-            </li>
-            <li className="nav-item">
-              <a href="/contact">Contato</a>
-            </li>
-          </ul>
-        </nav>
-
-        <div className="navbar-right">
-          <div className="user-profile">
-            <span className="username">PequenoDesenvolvedor</span>
-            <div className="user-avatar">
-              <FiUser />
-            </div>
+        <div className="filter-group">
+          <div className="filter-dropdown">
+            <FiFilter className="filter-icon" />
+            <select
+              value={selectedCategory}
+              onChange={(e) => handleCategoryChange(e.target.value)}
+              className="category-select"
+            >
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
           </div>
-          
-          <div className="quick-filters">
-            <button 
-              className={`filter-btn ${selectedCategory === "Todos" ? "active" : ""}`}
-              onClick={() => handleCategoryChange("Todos")}
+
+          <div className="filter-dropdown">
+            <select
+              value={sortBy}
+              onChange={handleSortChange}
+              className="category-select"
             >
-              Todos
-            </button>
-            <button 
-              className={`filter-btn ${sortBy === "newest" ? "active" : ""}`}
-              onClick={() => setSortBy("newest")}
-            >
-              Recentes
-            </button>
+              {sortOptions.map(option => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
           </div>
 
           <motion.button 
             className="add-project-btn"
             onClick={openModal}
-            whileHover={{ y: -2 }}
+            whileHover={{ y: -2, backgroundColor: "var(--roxo-3)" }}
             whileTap={{ scale: 0.98 }}
           >
             <FiPlus /> Adicionar Projeto
           </motion.button>
         </div>
-      </header>
+      </motion.div>
 
-      {/* Conteúdo Principal */}
+      {/* Main Content */}
       <main className="projects-content">
-        <div className="projects-header">
-          <motion.h2 
-            className="projects-title"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Meus Projetos
-          </motion.h2>
-          
-          <div className="projects-controls">
-            <div className="filter-group">
-              <div className="filter-dropdown">
-                <FiFilter className="filter-icon" />
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => handleCategoryChange(e.target.value)}
-                  className="category-select"
-                >
-                  {categories.map(category => (
-                    <option key={category} value={category}>{category}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="filter-dropdown">
-                <select
-                  value={sortBy}
-                  onChange={handleSortChange}
-                  className="category-select"
-                >
-                  {sortOptions.map(option => (
-                    <option key={option.value} value={option.value}>{option.label}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
+        <motion.h2 
+          className="projects-title"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Meus Projetos
+        </motion.h2>
         
         {isLoading ? (
           <div className="loading-projects">
@@ -250,6 +260,7 @@ function Projects() {
                   key={project.id}
                   custom={index}
                   variants={cardVariants}
+                  whileHover="hover"
                   layout
                 >
                   <ProjectCard {...project} />
@@ -268,7 +279,7 @@ function Projects() {
             <motion.button 
               className="clear-filters-btn"
               onClick={clearFilters}
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -2, backgroundColor: "var(--roxo-3)" }}
               whileTap={{ scale: 0.95 }}
             >
               Limpar todos os filtros
