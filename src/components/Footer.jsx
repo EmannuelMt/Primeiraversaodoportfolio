@@ -19,13 +19,13 @@ function Footer() {
 
   const socialLinks = [
     { 
-      url: "https://github.com/seuusuario", 
+      url: "https://github.com/EmannuelMt", 
       icon: <FaGithub className="social-icon" />, 
       label: "GitHub",
       color: "#6e5494"
     },
     { 
-      url: "https://linkedin.com/in/seuusuario", 
+      url: "https://www.linkedin.com/in/emannuel-matos-a98556261/", 
       icon: <FaLinkedin className="social-icon" />, 
       label: "LinkedIn",
       color: "#0077b5"
@@ -40,12 +40,12 @@ function Footer() {
   const contactInfo = [
     { 
       icon: <FaEnvelope className="contact-icon" />, 
-      text: "contato@meuportfolio.com",
+      text: "emannuelmatosdeoliveira@gmail.com",
       delay: 0.1
     },
     { 
       icon: <FaMapMarkerAlt className="contact-icon" />, 
-      text: "São Paulo, Brasil",
+      text: "Anapolis, Brasil",
       delay: 0.3
     }
   ];
@@ -87,13 +87,12 @@ function Footer() {
         {/* Coluna Sobre */}
         <motion.div className="footer-section" variants={itemVariants}>
           <div className="footer-logo">
-            <span className="logo-gradient">Dev</span>
-            <span className="logo-white">Lux</span>
+            <span className="logo-gradient">little</span>
+            <span className="logo-white">Dev</span>
             <div className="logo-badge">PRO</div>
           </div>
           <p className="footer-description">
-            Crafting digital excellence with cutting-edge design and 
-            flawless code execution since 2018.
+          Criando excelência digital com design de ponta e execução de código impecável desde  2024.
           </p>
           
           <div className="tech-stack">
@@ -198,7 +197,7 @@ function Footer() {
       >
         <div className="footer-border"></div>
         <p className="copyright">
-          &copy; {currentYear} <span className="highlight">DevLux</span>. Todos os direitos reservados.
+          &copy; {currentYear} <span className="highlight">LittleDev</span>. Todos os direitos reservados.
           <span className="watermark">v3.1.0</span>
         </p>
       </motion.div>

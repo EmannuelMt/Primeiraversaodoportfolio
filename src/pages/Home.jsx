@@ -14,22 +14,22 @@ import "./Home.css";
 const FEATURED_PROJECTS = [
   {
     id: 1,
-    title: "Sistema de Gerenciamento",
-    description: "Plataforma completa com dashboard admin, autenticação e relatórios em tempo real.",
+    title: "Site de Vendas",
+    description: "Em desenvolvimento.",
     technologies: ["React", "Node.js", "MongoDB"],
     link: "/projects/1"
   },
   {
     id: 2,
-    title: "E-commerce Moderno",
-    description: "Loja virtual com carrinho, checkout e integração com pagamentos.",
-    technologies: ["Next.js", "Stripe", "Tailwind"],
+    title: "Site de RPG",
+    description: "Em desenvolvimento.",
+    technologies: ["node.js", "react", "css"],
     link: "/projects/2"
   },
   {
     id: 3,
     title: "Aplicativo de Task",
-    description: "Gerenciador de tarefas com drag-n-drop, categorias e notificações.",
+    description: " Em desenvolvimento Gerenciador de tarefas com arrastar e soltar, categorias e notificações..",
     technologies: ["React Native", "Firebase", "Redux"],
     link: "/projects/3"
   }
@@ -45,18 +45,18 @@ const CURRENT_SKILLS = [
 
 // Futuros aprendizados
 const FUTURE_SKILLS = [
-  { name: "Rust", reason: "Para desenvolvimento de sistemas performáticos" },
-  { name: "WebAssembly", reason: "Para aplicações web de alto desempenho" },
-  { name: "Kubernetes", reason: "Para orquestração de containers em escala" },
-  { name: "Blockchain", reason: "Para entender tecnologias descentralizadas" }
+  { name: "Node.Js", reason: "" },
+  { name: "Figma", reason: "" },
+  { name: "Linux", reason: "" },
+  { name: "Banco de dados", reason: "" }
 ];
 
 // Stack tecnológico
 const TECH_STACK = [
-  { name: "Frontend", tools: ["React", "Next.js", "TailwindCSS", "Framer Motion"] },
-  { name: "Backend", tools: ["Node.js", "Express", "NestJS", "GraphQL"] },
-  { name: "Banco de Dados", tools: ["MongoDB", "PostgreSQL", "Redis"] },
-  { name: "DevOps", tools: ["Docker", "AWS", "GitHub Actions"] }
+  { name: "Frontend", tools: ["React",  "CSS", "Framer Motion"] },
+  { name: "Backend", tools: ["Node.js",] },
+  { name: "Banco de Dados", tools: ["MongoDB", "PostgreSQL",] },
+  { name: "DevOps", tools: [ "GitHub Actions"] }
 ];
 
 // Configurações de animação

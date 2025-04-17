@@ -9,7 +9,7 @@ const mockProjects = [
   {
     id: 1,
     title: "Portfólio Pessoal",
-    description: "Site para apresentar projetos e habilidades usando React, Node.js e MongoDB com design responsivo e animações modernas.",
+    description: "Em desenvolvimento. Site para apresentar projetos e habilidades usando React, Node.js e MongoDB com design responsivo e animações modernas.",
     image: "/proj1.png",
     tags: ["React", "CSS3", "Responsivo", "Framer Motion"],
     githubUrl: "#",
@@ -20,8 +20,8 @@ const mockProjects = [
   },
   {
     id: 2,
-    title: "E-commerce API",
-    description: "API RESTful para sistema e-commerce com Node.js, Express e MongoDB, incluindo autenticação JWT e pagamentos.",
+    title: "",
+    description: ".",
     image: "/proj2.png",
     tags: ["Node.js", "Express", "MongoDB", "JWT"],
     githubUrl: "#",
@@ -32,8 +32,8 @@ const mockProjects = [
   },
   {
     id: 3,
-    title: "Task Manager App",
-    description: "Aplicativo mobile para gerenciamento de tarefas com React Native e Firebase para sincronização em tempo real.",
+    title: "",
+    description: ".",
     image: "/proj3.png",
     tags: ["React Native", "Firebase", "Mobile"],
     githubUrl: "#",
@@ -44,8 +44,8 @@ const mockProjects = [
   },
   {
     id: 4,
-    title: "Blog Fullstack",
-    description: "Blog completo com frontend em React e backend em Node.js, com sistema de comentários e autenticação.",
+    title: "",
+    description: "",
     image: "/proj4.png",
     tags: ["React", "Node.js", "MongoDB", "Fullstack"],
     githubUrl: "#",
